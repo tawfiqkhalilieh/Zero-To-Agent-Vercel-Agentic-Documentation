@@ -1,0 +1,503 @@
+{
+    "document": {
+        "title": "Technical Documentation: Zero to Agent Jerusalem",
+        "version": "1.0",
+        "event": {
+            "organizer": "AI Collective Jerusalem",
+            "date": "April 28, 2026",
+            "curriculum_lead": "Tawfiq Khalilieh"
+        },
+        "sections": [
+            {
+                "id": "1.0",
+                "title": "Program Overview",
+                "content": "The AI Collective Jerusalem is conducting an intensive technical workshop on April 28, 2026. This curriculum facilitates a transition from conceptualization to deployment via three progressive stages: Interaction, Control, and Architecture.",
+                "stages": [
+                    "Interaction",
+                    "Control",
+                    "Architecture"
+                ]
+            },
+            {
+                "id": "2.0",
+                "title": "Fundamental Tier: Interaction",
+                "objective": "Establish foundational competence and technical orientation in agentic systems.",
+                "subsections": [
+                    {
+                        "id": "2.1",
+                        "title": "Theoretical Foundations",
+                        "concepts": [
+                            {
+                                "name": "Agent Definition",
+                                "description": "Autonomous systems utilizing Large Language Models (LLMs) for reasoning, tool orchestration, and task completion."
+                            },
+                            {
+                                "name": "Prompt Engineering",
+                                "description": "Distinction between user inputs, system instructions, and external tool definitions."
+                            },
+                            {
+                                "name": "Interface Protocols",
+                                "description": "Utilization of APIs to facilitate communication between applications and the Gemini model."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "2.2",
+                        "title": "Infrastructure Configuration",
+                        "tools": [
+                            {
+                                "name": "Gemini CLI",
+                                "description": "An open-source AI assistant that brings Google's Gemini model to the terminal for code analysis, debugging, and tool orchestration."
+                            },
+                            {
+                                "name": "Google Antigravity",
+                                "description": "A task-oriented agentic development platform that allows developers to orchestrate autonomous agents for planning and executing complex tasks."
+                            }
+                        ],
+                        "subsections": [
+                            {
+                                "id": "2.2.1",
+                                "title": "Essential System Prerequisites",
+                                "supported_os": [
+                                    "Windows",
+                                    "macOS",
+                                    "Linux"
+                                ],
+                                "prerequisites": [
+                                    {
+                                        "name": "Node.js",
+                                        "description": "Install the latest LTS version. Verify by running node -v in your terminal.",
+                                        "installation_note": "Click on the Windows Installer (.msi) link on the official Node.js website.",
+                                        "image": "https://raw.githubusercontent.com/tawfiqkhalilieh/Zero-To-Agent-Vercel-Agentic-Documentation/refs/heads/development/images/node-install-windows.png"
+                                    },
+                                    {
+                                        "name": "Terminal",
+                                        "description": "Use PowerShell or CMD (Windows), Terminal (macOS), or Bash/Zsh (Linux). Terminals are included by default on all three operating systems. Windows users are recommended to install Git Bash."
+                                    },
+                                    {
+                                        "name": "Gemini API Key",
+                                        "description": "API keys will be distributed at the beginning of the event. If you did not receive yours, please contact the staff team."
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "2.2.2",
+                                "title": "Gemini CLI Installation and Configuration",
+                                "steps": [
+                                    {
+                                        "step": "Installation",
+                                        "command": "npm install -g @google/gemini-cli",
+                                        "notes": "Requires a terminal and Node.js installed. If the command fails, refer to section 2.2.1. Linux users should prefix the command with sudo."
+                                    },
+                                    {
+                                        "step": "Authentication",
+                                        "command": "gemini auth",
+                                        "notes": "Provide your API key when prompted."
+                                    },
+                                    {
+                                        "step": "Vercel MCP Integration (Recommended)",
+                                        "description": "Adding the Vercel MCP (Model Context Protocol) to Gemini allows the CLI to be more accurate. Gemini CLI shares the same configuration as Gemini Code Assist.",
+                                        "sub_steps": [
+                                            "Ensure you have the Gemini CLI installed.",
+                                            "Add the following configuration to your ~/.gemini/settings.json file: { \"mcpServers\": { \"vercel\": { \"command\": \"npx\", \"args\": [\"mcp-remote\", \"https://mcp.vercel.com\"] } } }",
+                                            "Run the Gemini CLI and use the /mcp list command to see available MCP servers.",
+                                            "When prompted, authenticate with Vercel to grant access."
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "2.2.3",
+                                "title": "Project Setup: Gemini.md File",
+                                "description": "Download the Gemini.md file from the provided GitHub profile (link pending) and place it directly into your project's root folder."
+                            },
+                            {
+                                "id": "2.2.4",
+                                "title": "Google Antigravity Platform Access",
+                                "steps": [
+                                    {
+                                        "step": "Web Access",
+                                        "description": "Navigate to the Antigravity web portal."
+                                    },
+                                    {
+                                        "step": "Project Setup",
+                                        "description": "Create a new workspace and integrate your Gemini API key in the settings to enable agent orchestration."
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "2.2.5",
+                                "title": "Vercel Setup",
+                                "notes": [
+                                    "Redeem your credits: The link to redeem the code will be provided at the start of the event. Please contact staff if you have not received it.",
+                                    "TODO: Complete the Vercel setup guide with images from the platform."
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "2.3",
+                        "title": "Iterative Development Workflow",
+                        "concepts": [
+                            {
+                                "name": "Prompt-First Development",
+                                "description": "Writing instructions in natural language before writing a single line of code."
+                            },
+                            {
+                                "name": "The Iteration Loop",
+                                "steps": [
+                                    "Prompt",
+                                    "Test",
+                                    "Analyze Output",
+                                    "Adjust Instructions"
+                                ],
+                                "note": "Non-engineers can use AI chatbots to refine simple requests into detailed technical prompts."
+                            }
+                        ],
+                        "example": {
+                            "description": "To create a website showcasing cats, a prompt was provided to ChatGPT asking it to generate a Gemini CLI prompt using Node.js, Vercel, and Next.js.",
+                            "image": "http://raw.githubusercontent.com/tawfiqkhalilieh/Zero-To-Agent-Vercel-Agentic-Documentation/refs/heads/development/images/PromptGPT.png",
+                            "generated_prompt": {
+                                "title": "Build a modern, responsive cat showcase website",
+                                "stack": [
+                                    "Next.js (App Router)",
+                                    "Node.js",
+                                    "Vercel"
+                                ],
+                                "core_requirements": [
+                                    "Next.js 14+ with App Router",
+                                    "TypeScript",
+                                    "Tailwind CSS",
+                                    "Fully responsive (mobile-first)",
+                                    "Clean, playful, cat-themed design (soft colors, rounded UI, smooth animations)"
+                                ],
+                                "features": [
+                                    {
+                                        "name": "Homepage",
+                                        "details": [
+                                            "Hero section with a title like 'Meet My Cats'",
+                                            "Featured cat cards with image, name, and short description",
+                                            "Smooth hover effects"
+                                        ]
+                                    },
+                                    {
+                                        "name": "Cat Profile Pages (Dynamic Routes)",
+                                        "details": [
+                                            "Route: /cats/[slug]",
+                                            "Large image gallery",
+                                            "Name, age, breed",
+                                            "Personality description",
+                                            "Fun facts section"
+                                        ]
+                                    },
+                                    {
+                                        "name": "Gallery Page",
+                                        "details": [
+                                            "Masonry or grid layout of all cat photos",
+                                            "Click to expand images (modal/lightbox)"
+                                        ]
+                                    },
+                                    {
+                                        "name": "About Page",
+                                        "details": [
+                                            "Short story about me and my cats"
+                                        ]
+                                    },
+                                    {
+                                        "name": "Admin-Friendly Data Structure",
+                                        "details": [
+                                            "Store cat data in a local JSON file or mock CMS structure",
+                                            "Easily extendable later (e.g., headless CMS)"
+                                        ]
+                                    }
+                                ],
+                                "technical_requirements": [
+                                    "Use Next.js Image component for optimization",
+                                    "Use Static Generation (SSG) where possible",
+                                    "Use dynamic routing for cat pages",
+                                    "Include SEO metadata (title, description per page)",
+                                    "Add loading states and error handling"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "id": "2.4",
+                        "title": "Advanced Prompting Methodologies",
+                        "concepts": [
+                            {
+                                "name": "Structuring Instructions",
+                                "description": "Using clear delimiters and specific constraints."
+                            },
+                            {
+                                "name": "Simple Chaining",
+                                "description": "Breaking complex tasks into a sequence of smaller, manageable prompts.",
+                                "example": "Instead of 'put all items in the middle,' prompt the AI to center all elements within a specific div (providing the div ID)."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "2.5",
+                        "title": "Code Samples from The Official Documentation",
+                        "packages": [
+                            {
+                                "name": "ai",
+                                "install_command": "npm install ai dotenv",
+                                "description": "The AI SDK is a provider-agnostic TypeScript toolkit designed to help you build AI-powered applications and agents using popular UI frameworks like Next.js, React, Svelte, Vue, Angular, and runtimes like Node.js."
+                            },
+                            {
+                                "name": "dotenv",
+                                "description": "A zero-dependency module that loads environment variables from a .env file into process.env. Based on The Twelve-Factor App methodology."
+                            }
+                        ],
+                        "api_key_setup": {
+                            "description": "Create an API key in your Vercel dashboard and save it to your environment file.",
+                            "env_variable": "AI_GATEWAY_API_KEY=your_api_key_here",
+                            "note": "The API key should be created on the Vercel Platform."
+                        },
+                        "code_sample": {
+                            "language": "JavaScript",
+                            "description": "Test your setup (this can be skipped)",
+                            "code": "import { generateText } from 'ai';\n\nconst { text } = await generateText({\n  model: 'anthropic/claude-opus-4.6',\n  prompt: 'What is the capital of France?',\n});",
+                            "further_resources": "For more advanced examples, see the official docs: Templates section."
+                        }
+                    },
+                    {
+                        "id": "2.6",
+                        "title": "Tool Usage Guide",
+                        "tools": [
+                            {
+                                "name": "Gemini CLI",
+                                "description": "A tool that enables Gemini to operate within the terminal and interact with code directly.",
+                                "usage": "After installation, open your terminal and type gemini. The interface features a terminal screen with a central text input. Paste your prompt into this input to begin coding.",
+                                "image_terminal_launch": "https://raw.githubusercontent.com/tawfiqkhalilieh/Zero-To-Agent-Vercel-Agentic-Documentation/refs/heads/development/images/gemini-terminal.png",
+                                "image_cli_ui": "https://raw.githubusercontent.com/tawfiqkhalilieh/Zero-To-Agent-Vercel-Agentic-Documentation/refs/heads/development/images/gemini-cli-UI.png"
+                            },
+                            {
+                                "name": "Antigravity",
+                                "description": "Google Antigravity is an AI-assisted code editor.",
+                                "interface_layout": {
+                                    "left": "File structure",
+                                    "center": "Code editor",
+                                    "right": "AI agent chat"
+                                },
+                                "usage": "Use the chat interface on the right to start coding with the AI.",
+                                "image": "https://raw.githubusercontent.com/tawfiqkhalilieh/Zero-To-Agent-Vercel-Agentic-Documentation/refs/heads/development/images/anti-gravity-ui.png"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "2.7",
+                        "title": "Level I Capstone",
+                        "project": "Select any simple concept.",
+                        "example": "Training platform for writing formal texts.",
+                        "requirements": [
+                            "Must process user input.",
+                            "Must provide a formatted response based on specific system instructions."
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "3.0",
+                "title": "Intermediate Tier: Control",
+                "objective": "Scale the project by implementing multiple functionalities and pages. For advanced workflows, begin building and connecting multiple services.",
+                "subsections": [
+                    {
+                        "id": "3.1",
+                        "title": "Advanced API Orchestration",
+                        "concepts": [
+                            {
+                                "name": "Function/Tool Calling",
+                                "description": "Teaching the agent to interact with real-world data (e.g., checking weather, searching a database). Vercel enables the generation of a MongoDB Atlas database with only a few clicks."
+                            },
+                            {
+                                "name": "Structured Outputs",
+                                "description": "Forcing the model to return valid JSON schemas for programmatic use."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3.2",
+                        "title": "State Management and Persistence",
+                        "concepts": [
+                            {
+                                "name": "Short-term Memory",
+                                "description": "Implementing chat history objects to maintain conversational threads."
+                            },
+                            {
+                                "name": "Basic Persistence",
+                                "description": "Saving user preferences or session data to simple storage."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3.3",
+                        "title": "Diagnostic Evaluation",
+                        "concepts": [
+                            {
+                                "name": "Failure Analysis",
+                                "description": "Determining if a failure occurred due to the base prompt, system constraints, or a tool error."
+                            },
+                            {
+                                "name": "Refinement",
+                                "description": "Adjusting temperature and top-up settings to control creativity vs. reliability."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3.4",
+                        "title": "Agentic Logic Frameworks",
+                        "concepts": [
+                            {
+                                "name": "The Loop",
+                                "steps": [
+                                    "Input",
+                                    "Reasoning",
+                                    "Tool Selection",
+                                    "Tool Execution",
+                                    "Final Output"
+                                ]
+                            },
+                            {
+                                "name": "Separation of Concerns",
+                                "description": "Keeping logic for tool execution separate from the prompt logic."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3.5",
+                        "title": "Level II Capstone",
+                        "requirements": [
+                            "The system must utilize at least one external tool or API call.",
+                            "Maintains context across multiple turns.",
+                            "Produces a structured JSON output."
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "4.0",
+                "title": "Advanced Tier: Architecture",
+                "objective": "Design production-grade AI architectures under enterprise constraints.",
+                "subsections": [
+                    {
+                        "id": "4.1",
+                        "title": "Multi-Agent Orchestration",
+                        "concepts": [
+                            {
+                                "name": "Collaboration Patterns",
+                                "description": "Implementing 'Swarm' or 'Orchestrator' patterns."
+                            },
+                            {
+                                "name": "Role-Based Specialized Agents",
+                                "description": "Defining specific personas for Planning, Execution, and Review/Validation."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "4.2",
+                        "title": "Retrieval-Augmented Generation (RAG)",
+                        "concepts": [
+                            {
+                                "name": "Scalability",
+                                "description": "Why raw prompts fail with large datasets."
+                            },
+                            {
+                                "name": "Vector Databases",
+                                "description": "Using embeddings to retrieve relevant context before the model call."
+                            },
+                            {
+                                "name": "Trade-off Analysis",
+                                "description": "Balancing latency, cost, and retrieval accuracy."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "4.3",
+                        "title": "Observability and Performance Optimization",
+                        "concepts": [
+                            {
+                                "name": "Decision Logging",
+                                "description": "Tracing the agent's reasoning steps to understand 'why' it took an action."
+                            },
+                            {
+                                "name": "Cost Engineering",
+                                "description": "Token optimization and implementing caching strategies to reduce API spend."
+                            },
+                            {
+                                "name": "Safety Guardrails",
+                                "description": "Input validation and output constraints to prevent hallucinations in critical flows."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "4.4",
+                        "title": "Production Systems Integration",
+                        "concepts": [
+                            {
+                                "name": "Full-Stack Integration",
+                                "description": "Designing the backend service, API layer, and frontend (v0/Next.js)."
+                            },
+                            {
+                                "name": "Deployment",
+                                "description": "Moving the agent system to Vercel for global availability."
+                            }
+                        ]
+                    },
+                    {
+                        "id": "4.5",
+                        "title": "Level III Capstone",
+                        "options": [
+                            {
+                                "option": "A",
+                                "description": "A Research Agent with a full RAG pipeline."
+                            },
+                            {
+                                "option": "B",
+                                "description": "A Multi-step Workflow Automation Agent (e.g., Lead Qualifier to Calendar Booker)."
+                            },
+                            {
+                                "option": "C",
+                                "description": "A Multi-Agent System where a 'Planner' coordinates two 'Workers'."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "5.0",
+                "title": "Technical Resources and Infrastructure",
+                "resources": [
+                    {
+                        "name": "Vercel Credits",
+                        "detail": "$30 applied via event-specific link"
+                    },
+                    {
+                        "name": "Gemini API Support",
+                        "detail": "$100 support per person via LeapTheLimit"
+                    },
+                    {
+                        "name": "Global Guide",
+                        "detail": "Vercel Zero to Agent Guide",
+                        "url": "https://vercel.notion.site/02agentresources"
+                    },
+                    {
+                        "name": "Local Support",
+                        "detail": "Jerusalem Event Discord"
+                    },
+                    {
+                        "name": "Global Vercel Competition Submission",
+                        "detail": "Submission deadline is May 3rd. Must create a Vercel account before joining.",
+                        "url": "https://community.vercel.com/hackathons/zero-to-agent"
+                    },
+                    {
+                        "name": "Local Jerusalem AI Collective Competition Submission",
+                        "detail": "Submit to the local Jerusalem AI Collective competition.",
+                        "image": "https://raw.githubusercontent.com/tawfiqkhalilieh/Zero-To-Agent-Vercel-Agentic-Documentation/refs/heads/development/images/Vercel-hackathons.png"
+                    }
+                ]
+            }
+        ]
+    }
+}
