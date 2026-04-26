@@ -6,7 +6,7 @@ export interface DocChunk {
   id: string;
   title: string;
   content: string;
-  source: "docs" | "api" | "guide";
+  source: "docs" | "api" | "guide" | "gemini";
   url?: string;
   image?: string;
 }
@@ -121,17 +121,36 @@ export function getRAGIndex() {
     const geminiPath = join(process.cwd(), "sources", "gemini.md");
     const geminiData = readFileSync(geminiPath, "utf-8");
     
-    const sections = geminiData.split("---").filter(s => s.trim().length > 0);
-    sections.forEach((section, index) => {
-      const titleMatch = section.match(/^title:\s*(.*)$/m) || section.match(/^#\s*(.*)$/m);
-      const title = titleMatch ? titleMatch[1].trim() : `Gemini Doc ${index}`;
-      chunks.push({
-        id: `gemini-${index}`,
-        title,
-        content: section.trim(),
-        source: "docs"
-      });
-    });
+    // Split by --- at the start of a line
+    const sections = geminiData.split(/^---$/m).map(s => s.trim()).filter(Boolean);
+    
+    // gemini.md follows a pattern of: Frontmatter, Content, Frontmatter, Content...
+    for (let i = 0; i < sections.length; i += 2) {
+      const frontmatter = sections[i];
+      const content = sections[i + 1];
+      
+      if (frontmatter && content) {
+        const titleMatch = frontmatter.match(/^title:\s*(.*)$/m);
+        const title = titleMatch ? titleMatch[1].trim() : "Gemini Documentation";
+        
+        chunks.push({
+          id: `gemini-${i}`,
+          title,
+          content: content,
+          source: "gemini"
+        });
+      } else if (frontmatter) {
+        // Fallback if structure is different
+        const titleMatch = frontmatter.match(/^title:\s*(.*)$/m) || frontmatter.match(/^#\s*(.*)$/m);
+        const title = titleMatch ? titleMatch[1].trim() : `Gemini Doc ${i}`;
+        chunks.push({
+          id: `gemini-${i}`,
+          title,
+          content: frontmatter,
+          source: "gemini"
+        });
+      }
+    }
   } catch (e) {
     console.error("Error parsing gemini.md", e);
   }

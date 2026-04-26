@@ -47,7 +47,7 @@ export async function POST(req: Request) {
           execute: async ({ query }) => {
             try {
               const results = searchRAG(query);
-              return JSON.stringify(results.filter((r) => r.source === "docs" || r.source === "guide"));
+              return JSON.stringify(results.filter((r) => r.source === "docs" || r.source === "guide" || r.source === "gemini"));
             } catch (error) {
               console.error("Error in search_docs tool:", error);
               return JSON.stringify({ error: "Failed to search documentation" });
