@@ -6,7 +6,7 @@ export interface DocChunk {
   id: string;
   title: string;
   content: string;
-  source: "docs" | "api";
+  source: "docs" | "api" | "guide";
   url?: string;
   image?: string;
 }
@@ -118,30 +118,40 @@ export function getRAGIndex() {
 
   // Parse gemini.md
   try {
-    const apiPath = join(process.cwd(), "sources", "api-links.md");
-    const apiData = readFileSync(apiPath, "utf-8");
+    const geminiPath = join(process.cwd(), "sources", "gemini.md");
+    const geminiData = readFileSync(geminiPath, "utf-8");
     
-    // Very basic table parser for api-links.md
-    const lines = apiData.split("\n");
-    lines.forEach((line) => {
-      if (line.includes("|") && line.includes("[") && !line.includes("---")) {
-        const parts = line.split("|").map(p => p.trim());
-        if (parts.length >= 3) {
-          const nameMatch = parts[1].match(/\[(.*?)\]\((.*?)\)/);
-          if (nameMatch) {
-            chunks.push({
-              id: nameMatch[1],
-              title: nameMatch[1],
-              content: parts[2],
-              source: "api",
-              url: nameMatch[2]
-            });
-          }
-        }
-      }
+    const sections = geminiData.split("---").filter(s => s.trim().length > 0);
+    sections.forEach((section, index) => {
+      const titleMatch = section.match(/^title:\s*(.*)$/m) || section.match(/^#\s*(.*)$/m);
+      const title = titleMatch ? titleMatch[1].trim() : `Gemini Doc ${index}`;
+      chunks.push({
+        id: `gemini-${index}`,
+        title,
+        content: section.trim(),
+        source: "docs"
+      });
     });
   } catch (e) {
-    console.error("Error parsing api-links.md", e);
+    console.error("Error parsing gemini.md", e);
+  }
+
+  // Parse practical-guide-to-building-agents.json
+  try {
+    const guidePath = join(process.cwd(), "sources", "practical-guide-to-building-agents.json");
+    const guideData = JSON.parse(readFileSync(guidePath, "utf-8"));
+    if (guideData.document && guideData.document.chunks) {
+      guideData.document.chunks.forEach((chunk: any) => {
+        chunks.push({
+          id: chunk.chunk_id,
+          title: chunk.section,
+          content: chunk.content,
+          source: "guide"
+        });
+      });
+    }
+  } catch (e) {
+    console.error("Error parsing practical-guide-to-building-agents.json", e);
   }
 
 
