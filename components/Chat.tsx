@@ -14,11 +14,15 @@ import {
   Zap,
   Bot,
   Terminal,
-  Code2
+  Code2,
+  BookOpen,
+  X,
+  ExternalLink
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import booksData from "../books.json";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -26,6 +30,7 @@ function cn(...inputs: ClassValue[]) {
 
 export default function Chat() {
   const [isMounted, setIsMounted] = useState(false);
+  const [isSourcesOpen, setIsSourcesOpen] = useState(false);
 
   const { messages, input, handleInputChange, handleSubmit, setMessages, isLoading } = useChat({
     api: "/api/chat",
@@ -81,8 +86,16 @@ export default function Chat() {
             <Zap size={12} className="text-indigo-400" />
             <span className="text-[10px] font-bold text-zinc-400 tracking-tight">GEMINI 2.0 FLASH</span>
           </div>
+          
           <button 
+            onClick={() => setIsSourcesOpen(true)}
+            className="p-2 rounded-lg border border-white/5 flex items-center justify-center hover:bg-zinc-800 transition-all text-zinc-400 hover:text-white"
+            title="Further Reading"
+          >
+            <BookOpen size={16} />
+          </button>
 
+          <button 
             onClick={clearChat}
             className="p-2 rounded-lg border border-white/5 flex items-center justify-center hover:bg-zinc-800 transition-all text-zinc-400 hover:text-white"
             title="Clear Conversation"
@@ -91,6 +104,79 @@ export default function Chat() {
           </button>
         </div>
       </nav>
+
+      {/* Sources Modal */}
+      <AnimatePresence>
+        {isSourcesOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsSourcesOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl bg-zinc-900 border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]"
+            >
+              <div className="flex items-center justify-between p-6 border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400">
+                    <BookOpen size={20} />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-white leading-tight">Further Reading</h2>
+                    <p className="text-xs text-zinc-500">Full sources and workshop materials</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setIsSourcesOpen(false)}
+                  className="p-2 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-6 space-y-3 no-scrollbar">
+                {Object.entries(booksData).map(([title, url], idx) => (
+                  <motion.a
+                    key={title}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    className="flex items-center justify-between p-4 rounded-2xl bg-zinc-800/50 border border-white/5 hover:border-indigo-500/30 hover:bg-zinc-800 transition-all group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-zinc-900 flex items-center justify-center border border-white/5 text-zinc-500 group-hover:text-indigo-400 transition-colors">
+                        <Terminal size={18} />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-zinc-200 group-hover:text-white transition-colors line-clamp-1">{title}</span>
+                        <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-medium">PDF Source</span>
+                      </div>
+                    </div>
+                    <div className="p-2 text-zinc-600 group-hover:text-indigo-400 transition-colors">
+                      <ExternalLink size={16} />
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+
+              <div className="p-6 bg-zinc-900/50 border-t border-white/5 text-center">
+                <p className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] font-bold">
+                  The AI Collective • Zero to Agent
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Main Chat Area */}
       <div className="flex-1 overflow-y-auto no-scrollbar relative">
