@@ -76,7 +76,7 @@ export default function Chat() {
           <div>
             <span className="text-xs font-black tracking-tighter text-white uppercase">Agentic Mentor</span>
             <div className="flex items-center gap-1.5 leading-none">
-              <span className="text-[10px] text-zinc-500 font-medium">Vercel AI SDK</span>
+              <span className="text-[10px] text-zinc-500 font-medium">Building Agents with Agents</span>
             </div>
           </div>
         </div>
@@ -354,6 +354,45 @@ export default function Chat() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="py-4 px-6 border-t border-white/5 bg-zinc-950/20 backdrop-blur-sm">
+        <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase">
+              Built With <span className="text-red-500 animate-pulse">❤️</span> by{" "}
+              <a 
+                href="https://github.com/tawfiqkhalilieh" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-zinc-300 hover:text-indigo-400 transition-colors underline decoration-indigo-500/30 underline-offset-4"
+              >
+                Tawfiq Khalilieh
+              </a>
+            </span>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <a 
+              href="https://jerusalemai.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[10px] text-zinc-500 hover:text-white font-bold tracking-widest uppercase transition-colors"
+            >
+              Jerusalem AI Community
+            </a>
+            <div className="w-1 h-1 rounded-full bg-zinc-800" />
+            <a 
+              href="https://jerusalemai.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[10px] text-indigo-400 hover:text-indigo-300 font-bold tracking-widest uppercase transition-colors"
+            >
+              jerusalemai.com
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
